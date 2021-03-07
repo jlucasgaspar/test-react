@@ -1,5 +1,6 @@
 import { Table, Button, Icon } from 'semantic-ui-react';
 import { IShipping } from '../../models/IShipping';
+import '../../styles/shippingsTable.css';
 
 interface IShippingsTableProps {
     shippings?: IShipping[];
@@ -7,7 +8,7 @@ interface IShippingsTableProps {
 }
 
 export const ShippingsTable = (props: IShippingsTableProps): React.ReactElement => (
-    <Table singleLine>
+    <Table singleLine id="shippings-table">
         <Table.Header>
             <Table.Row>
                 <Table.HeaderCell>Nome do cliente</Table.HeaderCell>
@@ -47,9 +48,10 @@ export const ShippingsTable = (props: IShippingsTableProps): React.ReactElement 
                             primary
                             className="submit-button"
                             loading={props.loading}
-                            type={props.loading ? 'button' : 'submit'}
+                            type="button"
+                            onClick={() => console.log(shipping)}
                         >
-                            <Icon name="shipping fast" /> Adicionar entrega
+                            <Icon name="map marker alternate" /> Visualizar
                         </Button>
                     </Table.Cell>
                 </Table.Row>

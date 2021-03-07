@@ -3,6 +3,7 @@ import { IShipping } from '../models/IShipping';
 import { useShipping } from '../hooks/shipping';
 import { useToasts } from 'react-toast-notifications';
 import { ShippingsTable } from '../components/table/ShippingsTable';
+import { LoadingComponent } from '../components/loading/LoadingComponent';
 
 export const ListAllShippings = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -37,6 +38,12 @@ export const ListAllShippings = () => {
                 <button>Clique aqui para cadastrar sua primeira entrega</button>
                 {/* FIXME */}
             </>
+        )
+    }
+
+    if (loading) {
+        return (
+            <LoadingComponent text="Carregando entregas..." />
         )
     }
 
