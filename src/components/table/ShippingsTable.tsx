@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Table, Button, Icon } from 'semantic-ui-react';
 import { IShipping } from '../../models/IShipping';
 import '../../styles/shippingsTable.css';

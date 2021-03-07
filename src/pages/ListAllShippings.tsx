@@ -6,19 +6,20 @@ import { useShipping } from '../hooks/shipping';
 import { ShippingsTable } from '../components/table/ShippingsTable';
 import { LoadingComponent } from '../components/loading/LoadingComponent';
 import { MapsModal } from '../components/map/MapsModal';
+import { ModalComponent } from '../components/modal/Modal';
 
 export const ListAllShippings = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [shippings, setShippings] = useState<IShipping[]>([]);
 
-    const [mapIsOpen, setMapIsOpen] = useState<boolean>(false);
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
     const [currentShippingInMaps, setCurrentShippingInMaps] = useState<IShipping>({} as IShipping);
 
     const { listShippings } = useShipping();
     const { addToast } = useToasts();
 
     const handleCurrentShippingInMaps = useCallback((shipping: IShipping) => {
-        setMapIsOpen(true);
+        setModalIsOpen(true);
         setCurrentShippingInMaps(shipping);
     }, [])
 
@@ -64,12 +65,10 @@ export const ListAllShippings = () => {
                 loading={loading}
                 handleCurrentShippingInMaps={handleCurrentShippingInMaps}
             />
-            
-            <MapsModal
-                mapIsOpen={mapIsOpen}
-                setMapIsOpen={setMapIsOpen}
-                currentShippingInMaps={currentShippingInMaps}
-            />
+
+            <ModalComponent modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+                <MapsModal currentShippingInMaps={currentShippingInMaps} />
+            </ModalComponent>
         </>
     );
 }

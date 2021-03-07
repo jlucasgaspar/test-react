@@ -1,4 +1,4 @@
-import { Segment, Dimmer, Loader, Image } from 'semantic-ui-react'
+import { Segment, Dimmer, Loader } from 'semantic-ui-react'
 
 interface IComponentProps {
     text: string;
