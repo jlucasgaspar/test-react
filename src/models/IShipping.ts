@@ -14,3 +14,29 @@ export interface IShippingRequest {
     arrivalAddressCity: string;
     arrivalAddressState: string;
 }
+
+export interface IShipping {
+    id: string;
+    customerName: string;
+    date: Date;
+    departureAddress: {
+        street: string;
+        number: number;
+        additionalInfo?: string;
+        neighborhood: string;
+        city: string;
+        state: string;
+        lat: number;
+        lng: number;
+    }
+    arrivalAddress: {
+        street: string;
+        number: number;
+        additionalInfo?: string;
+        neighborhood: string;
+        city: string;
+        state: string;
+        lat: number;
+        lng: number;
+    }
+}

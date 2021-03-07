@@ -1,15 +1,20 @@
 import { ChangeEvent, FormEvent, SyntheticEvent, useCallback, useState } from 'react';
 import { DropdownProps, FormProps, InputOnChangeData } from 'semantic-ui-react';
+
+import { useShipping } from '../hooks/shipping';
 import { ShippingForm } from '../components/form/ShippingForm';
 import { IShippingRequest } from '../models/IShipping';
 
 export const CreateShipping = () => {
+    const [loading, setLoading] = useState<boolean>(false);
     const [values, setValues] = useState<IShippingRequest>();
 
-    const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>, data: FormProps) => {
-        event.preventDefault();
+    const { createShipping } = useShipping()
+
+    const handleSubmit = useCallback(async (event: FormEvent<HTMLFormElement>, data: FormProps) => {
         console.log(values);
-    }, [values]);
+        await createShipping(values);
+    }, [values, createShipping]);
 
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
         const newValues = Object.assign({}, values, { [data.name]: data.value });
@@ -27,6 +32,7 @@ export const CreateShipping = () => {
             handleChange={handleChange}
             handleSelectChange={handleSelectChange}
             values={values}
+            loading={loading}
         />
     );
 }
