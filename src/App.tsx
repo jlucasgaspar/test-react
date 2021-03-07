@@ -1,5 +1,9 @@
+import { CreateShipping } from './pages/CreateShipping';
+import 'semantic-ui-css/semantic.min.css';
+import './styles/global.css';
+
 export const App = () => (
-    <h1>Hello</h1>
+    <CreateShipping />
 );
 
 export default App;
