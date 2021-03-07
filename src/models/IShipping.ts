@@ -43,5 +43,5 @@ export interface IShipping {
 
 export interface IShippingHttpResponse {
     statusCode: number;
-    body: string;
+    body: any;
 }

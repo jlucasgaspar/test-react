@@ -4,7 +4,7 @@ import { api } from '../services/api';
 
 export interface IShippingContext {
     createShipping(values?: IShippingRequest): Promise<IShippingHttpResponse>;
-    listShippings(): Promise<IShipping[] | null>;
+    listShippings(): Promise<IShippingHttpResponse>;
 }
 
 export const ShippingCtx = createContext<IShippingContext>({} as IShippingContext);
@@ -50,8 +50,38 @@ export const ShippingProvider: React.FC = ({ children }) => {
         };
     }, []);
 
-    const listShippings = useCallback(async (): Promise<IShipping[] | null> => {
-        return null;
+    const listShippings = useCallback(async (): Promise<IShippingHttpResponse> => {
+        try {
+            const response = await api.get('/api/shipping')
+            
+            let shippingsArray: IShipping[] = [];
+
+            if (response.status !== 200) {
+                return {
+                    statusCode: response.status,
+                    body: shippingsArray
+                };
+            }
+
+            response.data.map((shipping: IShipping) => {
+                const shippingWithCorrectData = Object.assign({}, shipping, {
+                    date: new Date(shipping.date).toLocaleDateString('pt-BR')
+                });
+
+                return shippingsArray.push(shippingWithCorrectData);
+            })
+
+            return {
+                statusCode: response.status,
+                body: shippingsArray
+            };
+        } catch (error) {
+            //console.error(error);
+            return {
+                statusCode: 500,
+                body: 'Houve algum erro inesperado, por favor tente novamente.'
+            }
+        }
     }, []);
 
     return (
