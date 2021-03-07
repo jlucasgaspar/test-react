@@ -1,14 +1,16 @@
 export interface IShippingRequest {
     customerName: string;
     date: Date;
-    arrivalAddressNumber: number;
-    arrivalAddressStreet: string;
-    arrivalAddressAdditionalInfo?: string;
-    arrivalAddressCity: string;
-    arrivalAddressState: string;
+    departureAddressStreet: string;
     departureAddressNumber: number;
     departureAddressAdditionalInfo?: string;
-    departureAddressStreet: string;
+    departureAddressNeighborhood: string;
     departureAddressCity: string;
     departureAddressState: string;
+    arrivalAddressStreet: string;
+    arrivalAddressNumber: number;
+    arrivalAddressAdditionalInfo?: string;
+    arrivalAddressNeighborhood: string;
+    arrivalAddressCity: string;
+    arrivalAddressState: string;
 }
