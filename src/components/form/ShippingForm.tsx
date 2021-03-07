@@ -22,7 +22,7 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 onChange={props.handleChange}
                 value={props.values?.customerName}
                 width={10}
-                //required
+                required
                 loading={props.loading}
                 disabled={props.loading}
                 // FIXME: ver se é disabled ou readonly

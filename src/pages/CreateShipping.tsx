@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, SyntheticEvent, useCallback, useState } from 'react';
 import { DropdownProps, FormProps, InputOnChangeData } from 'semantic-ui-react';
+import { useToasts } from 'react-toast-notifications'
 
 import { useShipping } from '../hooks/shipping';
 import { ShippingForm } from '../components/form/ShippingForm';
@@ -9,7 +10,8 @@ export const CreateShipping = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [values, setValues] = useState<IShippingRequest>();
 
-    const { createShipping } = useShipping()
+    const { addToast } = useToasts();
+    const { createShipping } = useShipping();
 
     const handleSubmit = useCallback(async (event: FormEvent<HTMLFormElement>, data: FormProps) => {
         console.log(values);
