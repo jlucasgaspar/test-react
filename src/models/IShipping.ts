@@ -40,3 +40,8 @@ export interface IShipping {
         lng: number;
     }
 }
+
+export interface IShippingHttpResponse {
+    statusCode: number;
+    body: string;
+}

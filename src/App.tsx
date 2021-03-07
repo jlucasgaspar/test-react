@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './styles/global.css';
 
 export const App = () => (
-    <ToastProvider placement="top-right">
+    <ToastProvider placement="top-right" autoDismiss>
         <AppProvider>
             <CreateShipping />
         </AppProvider>

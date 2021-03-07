@@ -2,7 +2,7 @@ export const states = [
     { text: 'Acre', value: 'Acre', key: 'acre' },
     { text: 'Alagoas', value: 'Alagoas', key: 'alagoas' },
     { text: 'Amapá', value: 'Amapá', key: 'amapa' },
-    { text: 'Amazonas', value: '', key: 'amazonas' },
+    { text: 'Amazonas', value: 'Amazonas', key: 'amazonas' },
     { text: 'Bahia', value: 'Amazonas', key: 'bahia' },
     { text: 'Ceará', value: 'Ceará', key: 'ceara' },
     { text: 'Distrito Federal', value: 'Distrito Federal', key: 'distrito_federal' },

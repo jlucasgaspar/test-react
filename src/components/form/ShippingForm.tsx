@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, ReactElement, SyntheticEvent } from 'react'
-import { Form, FormProps, Button, InputOnChangeData, DropdownProps, Icon, Divider, Select } from 'semantic-ui-react'
+import { Form, Button, InputOnChangeData, DropdownProps, Icon, Divider, Select } from 'semantic-ui-react'
 import { states } from '../../constants/states';
 import { IShippingRequest } from '../../models/IShipping';
 import '../../styles/shippingForm.css';
 
 interface IShippingFormProps {
-    handleSubmit: (event: FormEvent<HTMLFormElement>, data: FormProps) => void;
+    handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
     handleChange: (event: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => void;
     handleSelectChange: (event: SyntheticEvent<HTMLElement, Event>, data: DropdownProps) => void;
     values: IShippingRequest | undefined;
@@ -13,7 +13,7 @@ interface IShippingFormProps {
 }
 
 export const ShippingForm = (props: IShippingFormProps): ReactElement => (
-    <Form onSubmit={props.handleSubmit} className="shipping-form">
+    <Form onSubmit={props.handleSubmit} className="shipping-form" loading={props.loading}>
         <Form.Group>
             <Form.Input
                 name="customerName"
@@ -23,8 +23,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 value={props.values?.customerName}
                 width={10}
                 required
-                loading={props.loading}
-                disabled={props.loading}
                 // FIXME: ver se é disabled ou readonly
             />
             <Form.Input
@@ -37,8 +35,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 value={props.values?.date}
                 width={6}
                 required
-                loading={props.loading}
-                disabled={props.loading}
             />
         </Form.Group>
 
@@ -54,8 +50,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 width={8}
                 value={props.values?.departureAddressStreet}
                 required
-                loading={props.loading}
-                disabled={props.loading}
             />
             <Form.Input
                 type="number"
@@ -66,8 +60,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 width={3}
                 value={props.values?.departureAddressNumber}
                 required
-                loading={props.loading}
-                disabled={props.loading}
             />
             <Form.Input
                 name="departureAddressNeighborhood"
@@ -88,7 +80,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 placeholder="Complemento (Opcional)"
                 width={5}
                 value={props.values?.departureAddressAdditionalInfo}
-                loading={props.loading}
             />
             <Form.Select
                 fluid
@@ -100,7 +91,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 name="departureAddressState"
                 width={5}
                 value={props.values?.departureAddressState}
-                loading={props.loading}
             />
             <Form.Input
                 name="departureAddressCity"
@@ -110,7 +100,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 width={6}
                 value={props.values?.departureAddressCity}
                 required
-                loading={props.loading}
             />
         </Form.Group>
 
@@ -126,7 +115,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 width={8}
                 value={props.values?.arrivalAddressStreet}
                 required
-                loading={props.loading}
             />
             <Form.Input
                 type="number"
@@ -137,7 +125,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 width={3}
                 value={props.values?.arrivalAddressNumber}
                 required
-                loading={props.loading}
             />
             <Form.Input
                 name="arrivalAddressNeighborhood"
@@ -147,7 +134,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 width={5}
                 value={props.values?.arrivalAddressNeighborhood}
                 required
-                loading={props.loading}
             />
         </Form.Group>
 
@@ -158,7 +144,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 label="Complemento (Opcional)"
                 placeholder="Complemento (Opcional)"
                 width={5}
-                loading={props.loading}
                 value={props.values?.arrivalAddressAdditionalInfo}
             />
             <Form.Field
@@ -166,11 +151,10 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 control={Select}
                 label="Estado"
                 placeholder="Estado"
-                name="arrivalAddressAdditionalState"
+                name="arrivalAddressState"
                 options={states}
                 onChange={props.handleSelectChange}
                 required
-                loading={props.loading}
                 width={5}
                 value={props.values?.arrivalAddressState}
             />
@@ -182,13 +166,17 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 width={6}
                 value={props.values?.arrivalAddressCity}
                 required
-                loading={props.loading}
             />
         </Form.Group>
 
-        <Button fluid primary className="submit-button" loading={props.loading}>
-            <Icon name="shipping fast" />
-            Adicionar entrega
+        <Button
+            fluid
+            primary
+            className="submit-button"
+            loading={props.loading}
+            type={props.loading ? 'button': 'submit'}
+        >
+            <Icon name="shipping fast" /> Adicionar entrega
         </Button>
     </Form>
 );
