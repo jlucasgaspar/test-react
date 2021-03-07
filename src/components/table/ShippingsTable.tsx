@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Table, Button, Icon } from 'semantic-ui-react';
 import { IShipping } from '../../models/IShipping';
 import '../../styles/shippingsTable.css';
@@ -5,6 +6,7 @@ import '../../styles/shippingsTable.css';
 interface IShippingsTableProps {
     shippings?: IShipping[];
     loading: boolean;
+    handleCurrentShippingInMaps: (shipping: IShipping) => void;
 }
 
 export const ShippingsTable = (props: IShippingsTableProps): React.ReactElement => (
@@ -49,7 +51,7 @@ export const ShippingsTable = (props: IShippingsTableProps): React.ReactElement 
                             className="submit-button"
                             loading={props.loading}
                             type="button"
-                            onClick={() => console.log(shipping)}
+                            onClick={() => props.handleCurrentShippingInMaps(shipping)}
                         >
                             <Icon name="map marker alternate" /> Visualizar
                         </Button>

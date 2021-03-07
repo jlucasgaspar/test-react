@@ -1,16 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
+
 import { IShipping } from '../models/IShipping';
 import { useShipping } from '../hooks/shipping';
-import { useToasts } from 'react-toast-notifications';
 import { ShippingsTable } from '../components/table/ShippingsTable';
 import { LoadingComponent } from '../components/loading/LoadingComponent';
+import { MapsModal } from '../components/map/MapsModal';
 
 export const ListAllShippings = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [shippings, setShippings] = useState<IShipping[]>([]);
 
+    const [mapIsOpen, setMapIsOpen] = useState<boolean>(false);
+    const [currentShippingInMaps, setCurrentShippingInMaps] = useState<IShipping>({} as IShipping);
+
     const { listShippings } = useShipping();
     const { addToast } = useToasts();
+
+    const handleCurrentShippingInMaps = useCallback((shipping: IShipping) => {
+        setMapIsOpen(true);
+        setCurrentShippingInMaps(shipping);
+    }, [])
 
     useEffect(() => {
         const populateTable = async () => {
@@ -48,6 +58,18 @@ export const ListAllShippings = () => {
     }
 
     return (
-        <ShippingsTable shippings={shippings} loading={loading} />
+        <>
+            <ShippingsTable
+                shippings={shippings}
+                loading={loading}
+                handleCurrentShippingInMaps={handleCurrentShippingInMaps}
+            />
+            
+            <MapsModal
+                mapIsOpen={mapIsOpen}
+                setMapIsOpen={setMapIsOpen}
+                currentShippingInMaps={currentShippingInMaps}
+            />
+        </>
     );
 }
