@@ -41,7 +41,15 @@ export const ListAllShippings = () => {
     }, [listShippings]);
 
     if (loading) return <LoadingComponent text="Carregando entregas..." />;
-    if (!loading && !shippings.length) return <ErrorMessage />;
+    if (!loading && !shippings.length) {
+        return (
+            <ErrorMessage
+                title="Não existe nenhuma entrega cadastrada"
+                bodyMsg="Cadastre sua primeira entrega"
+                bodyMsgHref="/"
+            />
+        )
+    }
     return (
         <>
             <ShippingsTable

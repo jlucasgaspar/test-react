@@ -1,12 +1,21 @@
 import { Message } from 'semantic-ui-react';
 
-export const ErrorMessage = () => (
+interface IErrorMsgProps {
+    title: string;
+    bodyMsg?: string;
+    bodyMsgHref?: string;
+}
+
+export const ErrorMessage = (props: IErrorMsgProps) => (
     <Message negative>
-        <Message.Header>Não existe nenhuma entrega cadastrada</Message.Header>
-        <p>
-            <a href="/" style={{ color: 'red' }}>
-                Cadastre sua primeira entrega
-            </a>
-        </p>
+        <Message.Header>{props.title}</Message.Header>
+        {props.bodyMsg &&
+            <p>
+                {props.bodyMsgHref
+                    ? <a href={props.bodyMsgHref} style={{ color: 'red' }}>{props.bodyMsg}</a>
+                    : <>{props.bodyMsg}</>
+                }
+            </p>
+        }
     </Message>
 );

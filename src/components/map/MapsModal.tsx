@@ -3,6 +3,7 @@ import { GoogleMap, useLoadScript, Marker, DirectionsRenderer, DirectionsService
 import { IShipping } from '../../models/IShipping';
 import { LoadingComponent } from '../loading/LoadingComponent';
 import { MapsInfoWindow } from './MapsInfoWindow';
+import { ErrorMessage } from '../errorMessage/ErrorMessage';
 
 interface IMapsProps {
     currentShippingInMaps: IShipping;
@@ -50,8 +51,8 @@ export const MapsModal = (props: IMapsProps) => {
         return { directions: response }
     }, [response]);
 
-    if (loadError) return <div>Error</div>; //FIXME
     if (!isLoaded) return <LoadingComponent text='Carregando mapa...' />;
+    if (loadError) return <ErrorMessage title="Erro ao carregar o mapa" />;
     return (
         <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center}>
             <DirectionsService

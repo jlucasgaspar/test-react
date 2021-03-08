@@ -9,7 +9,7 @@ interface IShippingsTableProps {
 }
 
 export const ShippingsTable = (props: IShippingsTableProps): React.ReactElement => (
-    <Table singleLine id="shippings-table">
+    <Table id="shippings-table" unstackable>
         <Table.Header>
             <Table.Row>
                 <Table.HeaderCell>Nome do cliente</Table.HeaderCell>
@@ -24,7 +24,12 @@ export const ShippingsTable = (props: IShippingsTableProps): React.ReactElement 
             {props.shippings && props.shippings.map(shipping => (
                 <Table.Row>
                     <Table.Cell>
-                        {shipping.customerName}
+                        <div>
+                            <span className="responsive-table-helper">
+                                <strong>Nome do cliente: </strong>
+                            </span>
+                            {shipping.customerName}
+                        </div>
                     </Table.Cell>
                     <Table.Cell>
                         {shipping.date}
