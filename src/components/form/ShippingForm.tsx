@@ -23,7 +23,6 @@ export const ShippingForm = (props: IShippingFormProps): ReactElement => (
                 value={props.values?.customerName}
                 width={10}
                 required
-                // FIXME: ver se é disabled ou readonly
             />
             <Form.Input
                 type="date"

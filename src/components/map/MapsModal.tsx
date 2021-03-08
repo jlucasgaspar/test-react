@@ -19,10 +19,12 @@ const center = {
     lng: -43.094640
 };
 
+const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '';
+
 export const MapsModal = (props: IMapsProps) => {
     const { arrivalAddress, departureAddress } = props.currentShippingInMaps;
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyCw8iGAGdrCjOHsg_GJmp2AHQJuQ3fHuh0' //FIXME
+        googleMapsApiKey: googleMapsApiKey
     });
 
     const [showArrivalInfo, setShowArrivalInfo] = useState<boolean>(false);
