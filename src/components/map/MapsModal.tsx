@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { GoogleMap, useLoadScript, Marker, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
 import { IShipping } from '../../models/IShipping';
 import { LoadingComponent } from '../loading/LoadingComponent';
@@ -7,12 +7,6 @@ import { MapsInfoWindow } from './MapsInfoWindow';
 interface IMapsProps {
     currentShippingInMaps: IShipping;
 };
-
-interface IDirections {
-    destination: string;
-    origin: string;
-    travelMode: 'DRIVING';
-}
 
 const mapContainerStyle = {
     width: '100%',
@@ -27,14 +21,12 @@ const center = {
 export const MapsModal = (props: IMapsProps) => {
     const { arrivalAddress, departureAddress } = props.currentShippingInMaps;
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: '' //FIXME
+        googleMapsApiKey: 'AIzaSyCw8iGAGdrCjOHsg_GJmp2AHQJuQ3fHuh0' //FIXME
     });
 
     const [showArrivalInfo, setShowArrivalInfo] = useState<boolean>(false);
     const [showDepartureInfo, setShowDepartureInfo] = useState<boolean>(false);
-
     const [response, setResponse] = useState(null);
-    const [directions, setDirections] = useState<IDirections>();
 
     const directionsCallback = useCallback((res) => {
         if (res !== null) {

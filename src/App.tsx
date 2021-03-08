@@ -1,15 +1,13 @@
 import { ToastProvider } from 'react-toast-notifications';
-import { CreateShipping } from './pages/CreateShipping';
 import { AppProvider } from './hooks';
+import { Home } from './pages/Home';
 import 'semantic-ui-css/semantic.min.css';
 import './styles/global.css';
-import { ListAllShippings } from './pages/ListAllShippings';
 
 export const App = () => (
     <ToastProvider placement="top-right" autoDismiss>
         <AppProvider>
-            {/* <CreateShipping /> */}
-            <ListAllShippings />
+            <Home />
         </AppProvider>
     </ToastProvider>
 );
