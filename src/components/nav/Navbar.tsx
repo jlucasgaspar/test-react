@@ -7,7 +7,7 @@ interface INavbarProps {
 }
 
 export const Navbar = (props: INavbarProps) => (
-    <Menu pointing secondary>
+    <Menu pointing secondary style={{ maxWidth: '100vw' }}>
         <Menu.Item
             icon="shipping fast"
             name='createShipping'

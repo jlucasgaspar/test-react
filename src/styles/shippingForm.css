@@ -1,5 +1,5 @@
 .shipping-form {
-    max-width: 900px !important;
+    max-width: 90%!important;
     margin: auto;
     margin-top: 30px;
     padding: 20px 40px;
@@ -19,4 +19,10 @@
 
 .submit-button, h2 {
     margin-top: 40px !important;
+}
+
+@media (max-width: 800px) {
+    .shipping-form {
+        width: 500px !important;
+    }
 }
