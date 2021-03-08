@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react';
 
 interface INavbarProps {
     activeItem: string;
-    setActiveItem: Dispatch<SetStateAction<string>>
+    setActiveItem: Dispatch<SetStateAction<string>>;
 }
 
 export const Navbar = (props: INavbarProps) => (

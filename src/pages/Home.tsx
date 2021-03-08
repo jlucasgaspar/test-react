@@ -4,7 +4,7 @@ import { CreateShipping } from './CreateShipping';
 import { ListAllShippings } from './ListAllShippings';
 
 export const Home = () => {
-    const [activeItem, setActiveItem] = useState<string>('');
+    const [activeItem, setActiveItem] = useState<string>('createShipping');
 
     return (
         <>

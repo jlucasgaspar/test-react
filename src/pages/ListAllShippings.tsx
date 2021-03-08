@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useToasts } from 'react-toast-notifications';
 
 import { IShipping } from '../models/IShipping';
 import { useShipping } from '../hooks/shipping';
@@ -7,6 +6,7 @@ import { ShippingsTable } from '../components/table/ShippingsTable';
 import { LoadingComponent } from '../components/loading/LoadingComponent';
 import { MapsModal } from '../components/map/MapsModal';
 import { ModalComponent } from '../components/modal/Modal';
+import { ErrorMessage } from '../components/errorMessage/ErrorMessage';
 
 export const ListAllShippings = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -16,12 +16,11 @@ export const ListAllShippings = () => {
     const [currentShippingInMaps, setCurrentShippingInMaps] = useState<IShipping>({} as IShipping);
 
     const { listShippings } = useShipping();
-    const { addToast } = useToasts();
 
     const handleCurrentShippingInMaps = useCallback((shipping: IShipping) => {
         setModalIsOpen(true);
         setCurrentShippingInMaps(shipping);
-    }, [])
+    }, []);
 
     useEffect(() => {
         const populateTable = async () => {
@@ -29,8 +28,7 @@ export const ListAllShippings = () => {
 
             const response = await listShippings();
             
-            if (response.statusCode !== 200) {
-                addToast(response.body, { appearance: 'error' });
+            if (response.statusCode === 500) {
                 setShippings([]);
                 return setLoading(false);
             }
@@ -40,24 +38,10 @@ export const ListAllShippings = () => {
         }
 
         populateTable();
-    }, [addToast, listShippings]);
+    }, [listShippings]);
 
-    if (!loading && !shippings) {
-        return (
-            <>
-                <h1>Não há entregas cadastradas.</h1>
-                <button>Clique aqui para cadastrar sua primeira entrega</button>
-                {/* FIXME */}
-            </>
-        )
-    }
-
-    if (loading) {
-        return (
-            <LoadingComponent text="Carregando entregas..." />
-        )
-    }
-
+    if (loading) return <LoadingComponent text="Carregando entregas..." />;
+    if (!loading && !shippings.length) return <ErrorMessage />;
     return (
         <>
             <ShippingsTable
